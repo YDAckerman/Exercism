@@ -38,8 +38,7 @@ def parse(input_string):
     head,tail = getHeadTail(input_string)
 
     print(toProps(head))
-    print(tail)
-    
+    print(tail)    
     if tail[0:2] == "((":
         ## split up and recurse on each branch
         branches = getBranches(tail[1:(len(tail) - 1)])
