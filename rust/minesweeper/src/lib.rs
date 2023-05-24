@@ -1,8 +1,8 @@
 use itertools::iproduct;
 use std::cmp::min;
 
-const STAR_BYTE: &u8 = &42;
-const STAR_STR: char = '*';
+const STAR_BYTE: u8 = 42;
+const STAR_CHAR: char = '*';
 
 pub fn annotate(minefield: &[&str]) -> Vec<String> {
 
@@ -13,7 +13,7 @@ pub fn annotate(minefield: &[&str]) -> Vec<String> {
              .iter()
              .enumerate()
              .map(|(j, b)| match b {
-                 STAR_BYTE => String::from(STAR_STR),
+                 &STAR_BYTE => String::from(STAR_CHAR),
                  _ => count_mines_by((i, j), minefield).to_count_string(),
              })
              .collect::<Vec<String>>().join("")
@@ -45,7 +45,7 @@ fn get_nbs((x, y): (usize, usize), (m, n): (usize, usize)) -> Vec<(usize, usize)
 fn is_mine((x,y): (usize, usize), board: &[&str]) -> usize {
 
     let board_val: u8 = board[x].as_bytes()[y];
-    match &board_val {
+    match board_val {
         STAR_BYTE => 1,
         _ => 0,
     }
